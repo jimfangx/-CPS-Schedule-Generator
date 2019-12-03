@@ -81,31 +81,109 @@ async function modifyPdf(data, font) {
     var x = 0;
     var y = 0;
     var classesDone = 0;
-    //M1
-    x = 121.68;
-    y = 1230;
-    // console.log(productSansFont.widthOfTextAtSize('Asian Worlds', 20))
-    for (classesDone = 0; classesDone < 8; classesDone++) {
-        firstPage.drawText('English I', {
-            x: ((169.92 - productSansFont.widthOfTextAtSize('English I', 20)) / 2) + x, //x & y measured in points; divide point value by 72 to get inches.
-            y: y,
-            size: 20,
-            font: productSansFont
-            // color: rgb(0.95, 0.1, 0.1),
-            // rotate: degrees(-45),
-        })
-        if (classesDone === 1) {
-            y -= 250
-        }
-        else if (classesDone === 3) {
-            y -= 290
-        }
-        else {
-            y -= 145
-        }
+    var classes = ["English I", "Asian Worlds", "Physics", "Beginning Debate", "Free Period", "French I", "Math 2"]
 
-    }
 
+    // function fillArray(classes, day) {
+    //     var order = [0,0,0,0,0,0,0]
+    //     var returnArray = ["","","","","","",""]
+    //     if (day === "m1") {
+
+    //     } else if(day === "t1") {
+    //         order[0] = 2;
+    //     }
+    // }
+    // I am sorry :( IK this is stupidly inefficient; but dont kill me pls thx <3
+    // for (var i = 0; i < 10; i++) {
+        var final = ["", "", "", "", "", "", ""]
+        // var m1 = ["", "", "", "", "", "", ""]
+        // if (i === 1) {  //M1
+            for (var i = 0; i < 7; i++) {
+                final[i] = classes[i]
+
+            }
+            console.log(final)
+            x = 121.68;
+            y = 1230;
+            // console.log(productSansFont.widthOfTextAtSize('Asian Worlds', 20))
+            for (classesDone = 0; classesDone < 7; classesDone++) {
+                firstPage.drawText(final[classesDone], {
+                    x: ((169.92 - productSansFont.widthOfTextAtSize(final[classesDone], 20)) / 2) + x, //x & y measured in points; divide point value by 72 to get inches.
+                    y: y,
+                    size: 20,
+                    font: productSansFont
+                    // color: rgb(0.95, 0.1, 0.1),
+                    // rotate: degrees(-45),
+                })
+                if (classesDone === 1) {
+                    y -= 250
+
+                }
+                else if (classesDone === 3) {
+                    y -= 290
+                }
+                else {
+                    y -= 145
+
+                }
+
+            }
+        // }
+        
+            console.log("I AM IN T1")
+            final = ["", "", "", "", "", "", ""]
+            x = 121.68+170;
+            y = 1230;
+            var t1 = [1, 2, 0, 3, 5, 6, 4]
+            for (var i = 0; i < 7; i++) {
+                final[i] = classes[t1[i]]
+                console.log(i)
+            }
+            console.log(final)
+            for (classesDone = 0; classesDone < 7; classesDone++) {
+                firstPage.drawText(final[classesDone], {
+                    x: ((169.92 - productSansFont.widthOfTextAtSize(final[classesDone], 20)) / 2) + x, //x & y measured in points; divide point value by 72 to get inches.
+                    y: y,
+                    size: 20,
+                    font: productSansFont
+                    // color: rgb(0.95, 0.1, 0.1),
+                    // rotate: degrees(-45),
+                })
+                if (classesDone === 1) {
+                    y -= 250
+                }
+                else if (classesDone === 3) {
+                    y -= 290
+                }
+                else {
+                    y -= 145
+                }
+    
+            }
+        
+
+
+
+        var w1 = []
+        var r1 = []
+        var f1 = []
+        var m2 = []
+        var t2 = []
+        var w2 = []
+        var r2 = []
+        var f2 = []
+        // each array into days array w/ correct order
+
+
+
+
+
+
+
+        
+
+
+    
     const pdfBytes = await pdfDoc.save()
     fs.writeFileSync('./out.pdf', pdfBytes, 'utf-8');
 }
