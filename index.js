@@ -97,7 +97,9 @@ async function modifyPdf(data, font) {
     // for (var i = 0; i < 10; i++) {
         var final = ["", "", "", "", "", "", ""]
         // var m1 = ["", "", "", "", "", "", ""]
-        // if (i === 1) {  //M1
+        // if (i === 1) {  
+            
+        //M1
             for (var i = 0; i < 7; i++) {
                 final[i] = classes[i]
 
@@ -129,10 +131,11 @@ async function modifyPdf(data, font) {
 
             }
         // }
-        
+
+        //t1
             console.log("I AM IN T1")
             final = ["", "", "", "", "", "", ""]
-            x = 121.68+170;
+            x += 170;
             y = 1230;
             var t1 = [1, 2, 0, 3, 5, 6, 4]
             for (var i = 0; i < 7; i++) {
@@ -160,19 +163,284 @@ async function modifyPdf(data, font) {
                 }
     
             }
+
+            //w1
+            console.log("I am in w1")
+            final = ["", "", "", "", "", "", ""]
+            x +=180;
+            y = 1187;
+            var w1 = [0, 1, 4, 5]
+            for (var i = 0; i < 4; i++) {
+                final[i] = classes[w1[i]]
+                console.log(i)
+            }
+            console.log(final)
+            for (classesDone = 0; classesDone < 4; classesDone++) {
+                firstPage.drawText(final[classesDone], {
+                    x: ((169.92 - productSansFont.widthOfTextAtSize(final[classesDone], 20)) / 2) + x, //x & y measured in points; divide point value by 72 to get inches.
+                    y: y,
+                    size: 20,
+                    font: productSansFont
+                    // color: rgb(0.95, 0.1, 0.1),
+                    // rotate: degrees(-45),
+                })
+                if (classesDone === 0) {
+                    y -= 386
+                }
+                else if (classesDone === 1) {
+                    y -= 357
+                }
+                // else if (classesDone === 2) {
+                //     y -= 290
+                // }
+                else {
+                    y -= 280
+                }
+    
+            }
+
+            //r1
+            console.log("I am in r1")
+            final = ["", "", "", "", "", "", ""]
+            x +=168;
+            y = 1022;
+            var w1 = [2, 3, 6]
+            for (var i = 0; i < 3; i++) {
+                final[i] = classes[w1[i]]
+                console.log(i)
+            }
+            console.log(final)
+            for (classesDone = 0; classesDone < 3; classesDone++) {
+                firstPage.drawText(final[classesDone], {
+                    x: ((169.92 - productSansFont.widthOfTextAtSize(final[classesDone], 20)) / 2) + x, //x & y measured in points; divide point value by 72 to get inches.
+                    y: y,
+                    size: 20,
+                    font: productSansFont
+                    // color: rgb(0.95, 0.1, 0.1),
+                    // rotate: degrees(-45),
+                })
+                if (classesDone === 0) {
+                    y -= 315
+                }
+                else if (classesDone === 1) {
+                    y -= 542
+                }
+                // else if (classesDone === 2) {
+                //     y -= 290
+                // }
+                else {
+                    y -= 280
+                }
+    
+            }
+
+             //f1
+             console.log("I am in r1")
+             final = ["", "", "", "", "", "", ""]
+             x +=172;
+             y = 1230;
+             var f1 = [2, 0, 1, 3, 6, 4, 5]
+             for (var i = 0; i < 7; i++) {
+                 final[i] = classes[f1[i]]
+                 console.log(i)
+             }
+             console.log(final)
+             for (classesDone = 0; classesDone < 7; classesDone++) {
+                 firstPage.drawText(final[classesDone], {
+                     x: ((169.92 - productSansFont.widthOfTextAtSize(final[classesDone], 20)) / 2) + x, //x & y measured in points; divide point value by 72 to get inches.
+                     y: y,
+                     size: 20,
+                     font: productSansFont
+                     // color: rgb(0.95, 0.1, 0.1),
+                     // rotate: degrees(-45),
+                 })
+                 if (classesDone === 1) {
+                    y -= 250
+
+                }
+                else if (classesDone === 3) {
+                    y -= 290
+                }
+                else {
+                    y -= 145
+
+                }
+     
+             }
+
+             //M2
+            for (var i = 0; i < 7; i++) {
+                final[i] = classes[i]
+
+            }
+            console.log(final)
+            x += 230;
+            y = 1230;
+            // console.log(productSansFont.widthOfTextAtSize('Asian Worlds', 20))
+            for (classesDone = 0; classesDone < 7; classesDone++) {
+                firstPage.drawText(final[classesDone], {
+                    x: ((169.92 - productSansFont.widthOfTextAtSize(final[classesDone], 20)) / 2) + x, //x & y measured in points; divide point value by 72 to get inches.
+                    y: y,
+                    size: 20,
+                    font: productSansFont
+                    // color: rgb(0.95, 0.1, 0.1),
+                    // rotate: degrees(-45),
+                })
+                if (classesDone === 1) {
+                    y -= 250
+
+                }
+                else if (classesDone === 3) {
+                    y -= 290
+                }
+                else {
+                    y -= 145
+
+                }
+
+            }
+
+            //t2
+            console.log("I am in w1")
+            final = ["", "", "", "", "", "", ""]
+            x +=175;
+            y = 1187;
+            var t2 = [1, 0, 5]
+            for (var i = 0; i < 3; i++) {
+                final[i] = classes[t2[i]]
+                console.log(i)
+            }
+            console.log(final)
+            for (classesDone = 0; classesDone < 3; classesDone++) {
+                firstPage.drawText(final[classesDone], {
+                    x: ((171.36 - productSansFont.widthOfTextAtSize(final[classesDone], 20)) / 2) + x, //x & y measured in points; divide point value by 72 to get inches.
+                    y: y,
+                    size: 20,
+                    font: productSansFont
+                    // color: rgb(0.95, 0.1, 0.1),
+                    // rotate: degrees(-45),
+                })
+                if (classesDone === 0) {
+                    y -= 386
+                }
+                else if (classesDone === 1) {
+                    y -= 450
+                }
+                // else if (classesDone === 2) {
+                //     y -= 290
+                // }
+                else {
+                    y -= 280
+                }
+    
+            }
+
+             //w2
+             console.log("I am in w1")
+             final = ["", "", "", "", "", "", ""]
+             x +=170;
+             y = 1187;
+             var w2 = [2, 3, 6, 4]
+             for (var i = 0; i < 4; i++) {
+                 final[i] = classes[w2[i]]
+                 console.log(i)
+             }
+             console.log(final)
+             for (classesDone = 0; classesDone < 4; classesDone++) {
+                 firstPage.drawText(final[classesDone], {
+                     x: ((171.36 - productSansFont.widthOfTextAtSize(final[classesDone], 20)) / 2) + x, //x & y measured in points; divide point value by 72 to get inches.
+                     y: y,
+                     size: 20,
+                     font: productSansFont
+                     // color: rgb(0.95, 0.1, 0.1),
+                     // rotate: degrees(-45),
+                 })
+                 if (classesDone === 0) {
+                     y -= 386
+                 }
+                 else if (classesDone === 1) {
+                     y -= 375
+                 }
+                 // else if (classesDone === 2) {
+                 //     y -= 290
+                 // }
+                 else {
+                     y -= 272
+                 }
+     
+             }
+
+             //r2
+             console.log("I am in w1")
+             final = ["", "", "", "", "", "", ""]
+             x +=170;
+             y = 1187;
+             var r2 = [0, 1, 4, 5]
+             for (var i = 0; i < 4; i++) {
+                 final[i] = classes[r2[i]]
+                 console.log(i)
+             }
+             console.log(final)
+             for (classesDone = 0; classesDone < 4; classesDone++) {
+                 firstPage.drawText(final[classesDone], {
+                     x: ((171.36 - productSansFont.widthOfTextAtSize(final[classesDone], 20)) / 2) + x, //x & y measured in points; divide point value by 72 to get inches.
+                     y: y,
+                     size: 20,
+                     font: productSansFont
+                     // color: rgb(0.95, 0.1, 0.1),
+                     // rotate: degrees(-45),
+                 })
+                 if (classesDone === 0) {
+                     y -= 386
+                 }
+                 else if (classesDone === 1) {
+                     y -= 375
+                 }
+                 // else if (classesDone === 2) {
+                 //     y -= 290
+                 // }
+                 else {
+                     y -= 272
+                 }
+     
+             }
+
+             //f2
+             console.log("I am in w1")
+             final = ["", "", "", "", "", "", ""]
+             x +=173;
+             y = 1187;
+             var r2 = [2, 3, 6]
+             for (var i = 0; i < 3; i++) {
+                 final[i] = classes[r2[i]]
+                 console.log(i)
+             }
+             console.log(final)
+             for (classesDone = 0; classesDone < 3; classesDone++) {
+                 firstPage.drawText(final[classesDone], {
+                     x: ((171.36 - productSansFont.widthOfTextAtSize(final[classesDone], 20)) / 2) + x, //x & y measured in points; divide point value by 72 to get inches.
+                     y: y,
+                     size: 20,
+                     font: productSansFont
+                     // color: rgb(0.95, 0.1, 0.1),
+                     // rotate: degrees(-45),
+                 })
+                 if (classesDone === 0) {
+                     y -= 445
+                 }
+                 else if (classesDone === 1) {
+                     y -= 515
+                 }
+                 // else if (classesDone === 2) {
+                 //     y -= 290
+                 // }
+                 else {
+                     y -= 265
+                 }
+     
+             }
+
         
-
-
-
-        var w1 = []
-        var r1 = []
-        var f1 = []
-        var m2 = []
-        var t2 = []
-        var w2 = []
-        var r2 = []
-        var f2 = []
-        // each array into days array w/ correct order
 
 
 
