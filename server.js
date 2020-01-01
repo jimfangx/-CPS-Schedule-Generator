@@ -505,6 +505,9 @@ app.post('/', function (request, response) {
     // }
 })
 
-port = 8000
+port = process.env.PORT;
+if (port == null || port == "") {
+    port = 8000;
+}
 app.listen(port)
-console.log(`Listening at http://localhost:${port}`)
+console.log(`Listening at https://blooming-tor-45007.herokuapp.com:${port}`) 
