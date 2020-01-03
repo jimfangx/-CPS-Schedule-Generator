@@ -1,0 +1,26 @@
+{
+  "name": "-cps-schedule-generator",
+  "version": "1.0.0",
+  "description": "CPS Schedule Generator -> Auto-fill PDF",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AirFusion45/-CPS-Schedule-Generator.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AirFusion45/-CPS-Schedule-Generator/issues"
+  },
+  "homepage": "https://github.com/AirFusion45/-CPS-Schedule-Generator#readme",
+  "dependencies": {
+    "@pdf-lib/fontkit": "0.0.4",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "node-fetch": "^2.6.0",
+    "pdf-lib": "^1.3.0"
+  }
+}

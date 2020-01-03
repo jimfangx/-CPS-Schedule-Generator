@@ -1,0 +1,22 @@
+.centered {
+    text-align: center;
+}
+#demo {
+    height: 680px;
+    width: 100%;
+}
+#classForm {
+    /* margin: 0 auto; */
+    width: 100%;
+    /* text-align: center; */
+    margin-left: 25%;
+    width: 50%;
+}
+#coreFuncSubmit {
+    /* margin: 0 25%; */
+    /* margin-right: 0%; */
+    margin-left: 45%;
+}
+body {
+    /* overflow: hidden; */
+}
