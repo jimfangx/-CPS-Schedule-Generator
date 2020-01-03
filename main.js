@@ -38,6 +38,10 @@
 
 // }
 
+// document.getElementById("coreFuncSubmit").onclick = function() {
+//     document.getElementById("classForm").submit();
+// }
+
 var form = document.getElementById('classForm');
 
 form.onsubmit = function (e) {
