@@ -35,15 +35,26 @@ Instructions on how to build CPS Schedule Generator from the source code.
     * Head to your website hosting provider. 
     * Open the file manager in cPanel.
     * Upload the `main.html`, `main.js` and `main.css` files to your website. Make sure the files are uploaded to the folder of your page/subpage. Also make sure that `.htaccess` has been modified to include `main.html`
+
+# License
+This projecet is licensed under MIT License - See the LICENSE.md file for more details. The main points of the MIT License are:
+* This code can be used commercially
+* This code can be modified
+* This code can be distributed
+* This code can be used for private use
+* This code has no Liability
+* This code has no Warranty
+* When using this code, credit must be given to the author
         
 # Authors
 * AirFusion45 - Owner
 
 # Contributions
-* Pending approval from contributor
+* R Malik - Creator of the implemented website's favicon. See his creation [here](https://raw.githubusercontent.com/AirFusion45/-CPS-Schedule-Generator/v1.0B/favicon.png)
 
 # Credits
 * PDF modification library from Hopding's pdf-lib [here](https://github.com/Hopding/pdf-lib).
+* Other side dependencies please see package.json
 
 # Contact Me
 If you find any bugs, license issues, missing credits, etc. Feel free to contact me by email or Discord!
