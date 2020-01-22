@@ -4,7 +4,7 @@
  *  Server sided hosted on Heroku. Website hosted on Infinity Free.
  *  WEBSITE WITH IMPLIMENTATION: http://generator.rocketscience.monster/
  *--------------------------------------------------------------------------------------------*/ -->
- 
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,7 +40,8 @@
     </div>
     <div id="coreFunc" class="row">
         <script src="main.js"></script>
-        <form id="classForm" method="POST" action="https://blooming-tor-45007.herokuapp.com/" class="col">
+        <form id="classForm" method="POST" action="https://cpsschgendev.herokuapp.com/" class="col">
+            <!-- https://blooming-tor-45007.herokuapp.com/ -->
             <div class="row">
                 <div class="input-field col s12">
                     <input type="text" id="a" name="first" placeholder="English I" class="validate">
@@ -83,6 +84,19 @@
                     <label for="g">Seventh Class (Block G)</label>
                 </div>
             </div>
+
+            <!-- <div class="row"> -->
+                <div class="input-field col s12">
+                <select name="cars" style="display: block;" class="input-field col s12">
+                    <option value="" disabled selected>Choose your option</option>
+                    <option value="volvo">Volvo</option>
+                    <option value="saab">Saab</option>
+                    <option value="fiat">Fiat</option>
+                    <option value="audi">Audi</option>
+                </select>
+                </div>
+            <!-- </div> -->
+
             <a class="waves-effect waves-light btn" type="submit" id="coreFuncSubmit"
                 onclick="document.getElementById('classForm').submit();">Submit</a>
         </form>

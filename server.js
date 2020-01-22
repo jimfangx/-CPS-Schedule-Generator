@@ -19,6 +19,7 @@ const { degrees, PDFDocument, StandardFonts, rgb } = pdfLib;
 var util = require('util');
 var fs = require('fs');
 const fetch = require("node-fetch");
+var vertical = false
 
 
 var classes = ["", "", "", "", "", "", ""];
@@ -33,6 +34,8 @@ app.post('/', function (request, response) {
     classes[4] = request.body.fifth;
     classes[5] = request.body.sixth;
     classes[6] = request.body.seventh;
+    vertical = request.body.
+    
 
     var fontData;
     fs.readFile('Roboto-Regular.ttf', function read(err, data1) {
@@ -46,11 +49,11 @@ app.post('/', function (request, response) {
             }
             content = data;
             console.log(data);
-            modifyPdf(data, fontData, classes);          // Or put the next step in a function and invoke it
+            modifyPdf(data, fontData, classes, vertical);          // Or put the next step in a function and invoke it
         });
     });
 
-    async function modifyPdf(data, font, classes) {
+    async function modifyPdf(data, font, classes, vertical) {
         // Load exsisting PDF
         const existingPdfBytes = data
         const pdfDoc = await PDFDocument.load(existingPdfBytes)
@@ -377,4 +380,5 @@ if (port == null || port == "") {
     port = 8000;
 }
 app.listen(port)
-console.log(`Listening at https://blooming-tor-45007.herokuapp.com:${port}`) 
+console.log(`Listening at https://cpsschgendev.herokuapp.com:${port}`) 
+//https://blooming-tor-45007.herokuapp.com

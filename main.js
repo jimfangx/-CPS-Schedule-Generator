@@ -4,7 +4,11 @@
  *  Server sided hosted on Heroku. Website hosted on Infinity Free.
  *  WEBSITE WITH IMPLIMENTATION: http://generator.rocketscience.monster/
  *--------------------------------------------------------------------------------------------*/
-
+document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('select');
+    var instances = M.FormSelect.init(elems, options);
+  });
+  
 var form = document.getElementById('classForm');
 
 form.onsubmit = function (e) {
