@@ -14,6 +14,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>CPS Schedule Generator</title>
     <script src="main.js"></script>
+    <!-- jQuery -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
     <!-- Compiled and minified JavaScript -->
@@ -22,6 +25,13 @@
 
     <!-- Favicon -->
     <link rel="icon" href="./favicon.png">
+
+    <script>
+        $(document).ready(function () {
+            $('select').formSelect();
+        });
+
+    </script>
 </head>
 
 <body>
@@ -87,13 +97,15 @@
 
             <!-- <div class="row"> -->
                 <div class="input-field col s12">
-                <select name="cars" style="display: block;" class="input-field col s12">
-                    <option value="" disabled selected>Choose your option</option>
-                    <option value="volvo">Volvo</option>
-                    <option value="saab">Saab</option>
-                    <option value="fiat">Fiat</option>
-                    <option value="audi">Audi</option>
-                </select>
+                    <!-- <div class="row"> -->
+                        <select name="cars">
+                            <option value="" disabled selected>Choose your option</option>
+                            <option value="volvo">Volvo</option>
+                            <option value="saab">Saab</option>
+                            <option value="fiat">Fiat</option>
+                            <option value="audi">Audi</option>
+                        </select>
+                    <!-- </div> -->
                 </div>
             <!-- </div> -->
 
@@ -108,6 +120,16 @@
                 href="https://infinityfree.net/" target="_blank">Infinity Free</a>. Project open-sourced under the MIT
             license on <a href="https://github.com/AirFusion45/-CPS-Schedule-Generator" target="_blank">Github</a>.</p>
     </div>
+    <!-- Import jQuery before materialize.js
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    Compiled and minified JavaScript
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('select').formSelect();
+        }); -->
+
+    </script>
 </body>
 
 </html>

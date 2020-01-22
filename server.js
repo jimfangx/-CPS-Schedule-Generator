@@ -19,7 +19,7 @@ const { degrees, PDFDocument, StandardFonts, rgb } = pdfLib;
 var util = require('util');
 var fs = require('fs');
 const fetch = require("node-fetch");
-var vertical = false
+// var vertical = false
 
 
 var classes = ["", "", "", "", "", "", ""];
@@ -34,7 +34,7 @@ app.post('/', function (request, response) {
     classes[4] = request.body.fifth;
     classes[5] = request.body.sixth;
     classes[6] = request.body.seventh;
-    vertical = request.body.
+    // vertical = request.body.
     
 
     var fontData;
@@ -49,11 +49,11 @@ app.post('/', function (request, response) {
             }
             content = data;
             console.log(data);
-            modifyPdf(data, fontData, classes, vertical);          // Or put the next step in a function and invoke it
+            modifyPdf(data, fontData, classes);          // Or put the next step in a function and invoke it
         });
     });
 
-    async function modifyPdf(data, font, classes, vertical) {
+    async function modifyPdf(data, font, classes) {
         // Load exsisting PDF
         const existingPdfBytes = data
         const pdfDoc = await PDFDocument.load(existingPdfBytes)
