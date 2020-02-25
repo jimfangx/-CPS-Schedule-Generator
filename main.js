@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var elems = document.querySelectorAll('select');
     var instances = M.FormSelect.init(elems, options);
   });
-  
+
 var form = document.getElementById('classForm');
 
 form.onsubmit = function (e) {
@@ -18,7 +18,10 @@ form.onsubmit = function (e) {
     var data = {};
     for (var i = 0, ii = form.length; i < ii; ++i) {
         var input = form[i];
-        if (input.name) {
+        if (input.value.length > 100) { // sanitize input
+            alert(`Class name of ${input.name} is way too long.`)
+        }
+        else if (input.name) {
             data[input.name] = input.value;
         }
     }

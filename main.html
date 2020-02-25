@@ -50,8 +50,9 @@
     </div>
     <div id="coreFunc" class="row">
         <script src="main.js"></script>
-        <form id="classForm" method="POST" action="https://cpsschgendev.herokuapp.com/" class="col">
+        <form id="classForm" method="POST" action="http://localhost:8000/" class="col">
             <!-- https://blooming-tor-45007.herokuapp.com/ -->
+            <!-- https://cpsschgendev.herokuapp.com/ -->
             <div class="row">
                 <div class="input-field col s12">
                     <input type="text" id="a" name="first" placeholder="English I" class="validate">
@@ -93,22 +94,17 @@
                     <input type="text" id="g" name="seventh" placeholder="Math 2" class="validate">
                     <label for="g">Seventh Class (Block G)</label>
                 </div>
-            </div>
-
-            <!-- <div class="row"> -->
-                <div class="input-field col s12">
-                    <!-- <div class="row"> -->
-                        <select name="cars">
-                            <option value="" disabled selected>Choose your option</option>
-                            <option value="volvo">Volvo</option>
-                            <option value="saab">Saab</option>
-                            <option value="fiat">Fiat</option>
-                            <option value="audi">Audi</option>
-                        </select>
-                    <!-- </div> -->
-                </div>
             <!-- </div> -->
-
+            <!-- <div class="row"> -->
+             <!--Combine divs to stop a gap  -->
+                <div class="input-field col s12">
+                    <select name="vertical">
+                        <option value="" disabled selected>Choose style</option>
+                        <option value="vertical">Vertical</option>
+                        <option value="horizontal">Horizontal</option>
+                    </select>
+                </div>
+            </div>
             <a class="waves-effect waves-light btn" type="submit" id="coreFuncSubmit"
                 onclick="document.getElementById('classForm').submit();">Submit</a>
         </form>
@@ -120,16 +116,6 @@
                 href="https://infinityfree.net/" target="_blank">Infinity Free</a>. Project open-sourced under the MIT
             license on <a href="https://github.com/AirFusion45/-CPS-Schedule-Generator" target="_blank">Github</a>.</p>
     </div>
-    <!-- Import jQuery before materialize.js
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    Compiled and minified JavaScript
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('select').formSelect();
-        }); -->
-
-    </script>
 </body>
 
 </html>
