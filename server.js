@@ -19,6 +19,9 @@ const { degrees, PDFDocument, StandardFonts, rgb } = pdfLib;
 var util = require('util');
 var fs = require('fs');
 const fetch = require("node-fetch");
+var Hypher = require('hypher'),
+    english = require('hyphenation.en-us'),
+    h = new Hypher(english);
 var vertical = 'horizontal'
 
 
@@ -103,23 +106,53 @@ app.post('/', function (request, response) {
             var finalWrite = "";
             var finalWriteSecond = "";
             for (classesDone = 0; classesDone < 7; classesDone++) {
+                //ALPHA EXP: Replace words w/ symbols 
+                if (final[classesDone].indexOf("and") != -1) {
+                    final[classesDone]=final[classesDone].replace("and", "&")
+                }
+                
                 // ALPHA EXP: Auto wrapping & double lengthing
-
+                
                 if (productSansFont.widthOfTextAtSize(final[classesDone], 20) > 171.36) { // too long
-                    if (final[classesDone].indexOf(' ') != 0) { // Has space (2 words)
+                    if (final[classesDone].indexOf(' ') != -1) { // Has space (2 words)
                         var splitString = final[classesDone].split(' ');
-                        y += 5;
+                        y += productSansFont.heightAtSize(20);
                         finalWrite = splitString[0];
-                        finalWriteSecond = splitString[1];
+                        finalWriteSecond = splitString[1]; // doesnt workl if there are multiple " "
 
-                    } else if (final[classesDone].indexOf(':') != 0) {
-
+                    } else if (final[classesDone].indexOf(':') != -1) {
+                        var splitString = final[classesDone].split(' ');
+                        y += productSansFont.heightAtSize(20);
+                        finalWrite = splitString[0];
+                        finalWriteSecond = splitString[1]; // doesnt work if there are multiple :
                     } else { // One word
-
+                        var hypWord = h.hyphenate(final[classesDone]);
+                        var topWord = "";
+                        var finalClassesDone = final[classesDone];
+                        // console.log(finalClassesDone)
+                        console.log(finalWriteSecond)
+                        for (var i = 0; i<hypWord.length; i++) {
+                            topWord+=hypWord[i];
+                            if (productSansFont.widthOfTextAtSize(topWord, 20) > 171.36) {
+                                topWord=topWord.substring(0,topWord.indexOf(hypWord[i])); // remove the str that causes over length
+                                console.log(topWord)
+                                finalWrite = topWord;
+                                console.log(finalWrite);
+                                finalWriteSecond = final[classesDone].substring(final[classesDone].indexOf(topWord)+topWord.length)
+                                console.log("SDJFLKSjdflkasjlkfjaslkfjsalkfjsalkfjlsadkdjflsadjfsaddfkjsaldkfjasdlk;\n")
+                                console.log(finalClassesDone.indexOf(topWord));
+                                console.log(finalClassesDone)
+                                console.log(topWord)
+                                // = final[classesDone].substring(final[classesDone].indexOf(topWord)+1,final[classesDone].length)
+                                break;
+                            }
+                        }
+                        y += productSansFont.heightAtSize(20);
                     }
                 } else {
                     finalWrite = final[classesDone];
                 }
+
 
                 firstPage.drawText(finalWrite, {
                     x: ((169.92 - productSansFont.widthOfTextAtSize(finalWrite, 20)) / 2) + x, //x & y measured in points; divide point value by 72 to get inches.
@@ -131,11 +164,11 @@ app.post('/', function (request, response) {
                 if (productSansFont.widthOfTextAtSize(final[classesDone], 20) > 171.36) {//need second line writer
                     firstPage.drawText(finalWriteSecond, {
                         x: ((169.92 - productSansFont.widthOfTextAtSize(finalWriteSecond, 20)) / 2) + x, //x & y measured in points; divide point value by 72 to get inches.
-                        y: y - 10,
+                        y: y - (productSansFont.heightAtSize(20) + 5),
                         size: 20,
                         font: productSansFont
                     })
-                    y -= 5;
+                    y -= productSansFont.heightAtSize(20);
                 }
                 if (classesDone === 1) {
                     y -= 250
