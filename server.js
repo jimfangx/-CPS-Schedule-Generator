@@ -99,13 +99,44 @@ app.post('/', function (request, response) {
             }
             x = 121.68;
             y = 1230;
+
+            var finalWrite = "";
+            var finalWriteSecond = "";
             for (classesDone = 0; classesDone < 7; classesDone++) {
-                firstPage.drawText(final[classesDone], {
-                    x: ((169.92 - productSansFont.widthOfTextAtSize(final[classesDone], 20)) / 2) + x, //x & y measured in points; divide point value by 72 to get inches.
+                // ALPHA EXP: Auto wrapping & double lengthing
+
+                if (productSansFont.widthOfTextAtSize(final[classesDone], 20) > 171.36) { // too long
+                    if (final[classesDone].indexOf(' ') != 0) { // Has space (2 words)
+                        var splitString = final[classesDone].split(' ');
+                        y += 5;
+                        finalWrite = splitString[0];
+                        finalWriteSecond = splitString[1];
+
+                    } else if (final[classesDone].indexOf(':') != 0) {
+
+                    } else { // One word
+
+                    }
+                } else {
+                    finalWrite = final[classesDone];
+                }
+
+                firstPage.drawText(finalWrite, {
+                    x: ((169.92 - productSansFont.widthOfTextAtSize(finalWrite, 20)) / 2) + x, //x & y measured in points; divide point value by 72 to get inches.
                     y: y,
                     size: 20,
                     font: productSansFont
                 })
+
+                if (productSansFont.widthOfTextAtSize(final[classesDone], 20) > 171.36) {//need second line writer
+                    firstPage.drawText(finalWriteSecond, {
+                        x: ((169.92 - productSansFont.widthOfTextAtSize(finalWriteSecond, 20)) / 2) + x, //x & y measured in points; divide point value by 72 to get inches.
+                        y: y - 10,
+                        size: 20,
+                        font: productSansFont
+                    })
+                    y -= 5;
+                }
                 if (classesDone === 1) {
                     y -= 250
 
