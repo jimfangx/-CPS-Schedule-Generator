@@ -108,11 +108,11 @@ app.post('/', function (request, response) {
             for (classesDone = 0; classesDone < 7; classesDone++) {
                 //ALPHA EXP: Replace words w/ symbols 
                 if (final[classesDone].indexOf("and") != -1) {
-                    final[classesDone]=final[classesDone].replace("and", "&")
+                    final[classesDone] = final[classesDone].replace("and", "&")
                 }
-                
+
                 // ALPHA EXP: Auto wrapping & double lengthing
-                
+
                 if (productSansFont.widthOfTextAtSize(final[classesDone], 20) > 171.36) { // too long
                     if (final[classesDone].indexOf(' ') != -1) { // Has space (2 words)
                         var splitString = final[classesDone].split(' ');
@@ -131,18 +131,18 @@ app.post('/', function (request, response) {
                         var finalClassesDone = final[classesDone];
                         // console.log(finalClassesDone)
                         console.log(finalWriteSecond)
-                        for (var i = 0; i<hypWord.length; i++) {
-                            topWord+=hypWord[i];
+                        for (var i = 0; i < hypWord.length; i++) {
+                            topWord += hypWord[i];
                             if (productSansFont.widthOfTextAtSize(topWord, 20) > 171.36) {
-                                topWord=topWord.substring(0,topWord.indexOf(hypWord[i])); // remove the str that causes over length
-                                console.log(topWord)
+                                topWord = topWord.substring(0, topWord.indexOf(hypWord[i])); // remove the str that causes over length
+                                // console.log(topWord)
                                 finalWrite = topWord;
-                                console.log(finalWrite);
-                                finalWriteSecond = final[classesDone].substring(final[classesDone].indexOf(topWord)+topWord.length)
-                                console.log("SDJFLKSjdflkasjlkfjaslkfjsalkfjsalkfjlsadkdjflsadjfsaddfkjsaldkfjasdlk;\n")
-                                console.log(finalClassesDone.indexOf(topWord));
-                                console.log(finalClassesDone)
-                                console.log(topWord)
+                                // console.log(finalWrite);
+                                finalWriteSecond = final[classesDone].substring(final[classesDone].indexOf(topWord) + topWord.length)
+                                // console.log("SDJFLKSjdflkasjlkfjaslkfjsalkfjsalkfjlsadkdjflsadjfsaddfkjsaldkfjasdlk;\n")
+                                // console.log(finalClassesDone.indexOf(topWord));
+                                // console.log(finalClassesDone)
+                                // console.log(topWord)
                                 // = final[classesDone].substring(final[classesDone].indexOf(topWord)+1,final[classesDone].length)
                                 break;
                             }
@@ -195,13 +195,72 @@ app.post('/', function (request, response) {
                 console.log(i)
             }
             console.log(final)
+            finalWrite = "";
+            finalWriteSecond = "";
             for (classesDone = 0; classesDone < 7; classesDone++) {
-                firstPage.drawText(final[classesDone], {
-                    x: ((169.92 - productSansFont.widthOfTextAtSize(final[classesDone], 20)) / 2) + x, //x & y measured in points; divide point value by 72 to get inches.
+                 //ALPHA EXP: Replace words w/ symbols 
+                 if (final[classesDone].indexOf("and") != -1) {
+                    final[classesDone] = final[classesDone].replace("and", "&")
+                }
+
+                // ALPHA EXP: Auto wrapping & double lengthing
+
+                if (productSansFont.widthOfTextAtSize(final[classesDone], 20) > 171.36) { // too long
+                    if (final[classesDone].indexOf(' ') != -1) { // Has space (2 words)
+                        var splitString = final[classesDone].split(' ');
+                        y += productSansFont.heightAtSize(20);
+                        finalWrite = splitString[0];
+                        finalWriteSecond = splitString[1]; // doesnt workl if there are multiple " "
+
+                    } else if (final[classesDone].indexOf(':') != -1) {
+                        var splitString = final[classesDone].split(' ');
+                        y += productSansFont.heightAtSize(20);
+                        finalWrite = splitString[0];
+                        finalWriteSecond = splitString[1]; // doesnt work if there are multiple :
+                    } else { // One word
+                        var hypWord = h.hyphenate(final[classesDone]);
+                        var topWord = "";
+                        var finalClassesDone = final[classesDone];
+                        // console.log(finalClassesDone)
+                        console.log(finalWriteSecond)
+                        for (var i = 0; i < hypWord.length; i++) {
+                            topWord += hypWord[i];
+                            if (productSansFont.widthOfTextAtSize(topWord, 20) > 171.36) {
+                                topWord = topWord.substring(0, topWord.indexOf(hypWord[i])); // remove the str that causes over length
+                                // console.log(topWord)
+                                finalWrite = topWord;
+                                // console.log(finalWrite);
+                                finalWriteSecond = final[classesDone].substring(final[classesDone].indexOf(topWord) + topWord.length)
+                                // console.log("SDJFLKSjdflkasjlkfjaslkfjsalkfjsalkfjlsadkdjflsadjfsaddfkjsaldkfjasdlk;\n")
+                                // console.log(finalClassesDone.indexOf(topWord));
+                                // console.log(finalClassesDone)
+                                // console.log(topWord)
+                                // = final[classesDone].substring(final[classesDone].indexOf(topWord)+1,final[classesDone].length)
+                                break;
+                            }
+                        }
+                        y += productSansFont.heightAtSize(20);
+                    }
+                } else {
+                    finalWrite = final[classesDone];
+                }
+
+                firstPage.drawText(finalWrite, {
+                    x: ((169.92 - productSansFont.widthOfTextAtSize(finalWrite, 20)) / 2) + x, //x & y measured in points; divide point value by 72 to get inches.
                     y: y,
                     size: 20,
                     font: productSansFont
                 })
+
+                if (productSansFont.widthOfTextAtSize(final[classesDone], 20) > 171.36) {//need second line writer
+                    firstPage.drawText(finalWriteSecond, {
+                        x: ((169.92 - productSansFont.widthOfTextAtSize(finalWriteSecond, 20)) / 2) + x, //x & y measured in points; divide point value by 72 to get inches.
+                        y: y - (productSansFont.heightAtSize(20) + 5),
+                        size: 20,
+                        font: productSansFont
+                    })
+                    y -= productSansFont.heightAtSize(20);
+                }
                 if (classesDone === 1) {
                     y -= 250
                 }
@@ -225,13 +284,71 @@ app.post('/', function (request, response) {
                 console.log(i)
             }
             console.log(final)
+            finalWrite = "";
+            finalWriteSecond = "";
             for (classesDone = 0; classesDone < 4; classesDone++) {
-                firstPage.drawText(final[classesDone], {
-                    x: ((169.92 - productSansFont.widthOfTextAtSize(final[classesDone], 20)) / 2) + x, //x & y measured in points; divide point value by 72 to get inches.
+                 //ALPHA EXP: Replace words w/ symbols 
+                 if (final[classesDone].indexOf("and") != -1) {
+                    final[classesDone] = final[classesDone].replace("and", "&")
+                }
+
+                // ALPHA EXP: Auto wrapping & double lengthing
+
+                if (productSansFont.widthOfTextAtSize(final[classesDone], 20) > 171.36) { // too long
+                    if (final[classesDone].indexOf(' ') != -1) { // Has space (2 words)
+                        var splitString = final[classesDone].split(' ');
+                        y += productSansFont.heightAtSize(20);
+                        finalWrite = splitString[0];
+                        finalWriteSecond = splitString[1]; // doesnt workl if there are multiple " "
+
+                    } else if (final[classesDone].indexOf(':') != -1) {
+                        var splitString = final[classesDone].split(' ');
+                        y += productSansFont.heightAtSize(20);
+                        finalWrite = splitString[0];
+                        finalWriteSecond = splitString[1]; // doesnt work if there are multiple :
+                    } else { // One word
+                        var hypWord = h.hyphenate(final[classesDone]);
+                        var topWord = "";
+                        var finalClassesDone = final[classesDone];
+                        // console.log(finalClassesDone)
+                        console.log(finalWriteSecond)
+                        for (var i = 0; i < hypWord.length; i++) {
+                            topWord += hypWord[i];
+                            if (productSansFont.widthOfTextAtSize(topWord, 20) > 171.36) {
+                                topWord = topWord.substring(0, topWord.indexOf(hypWord[i])); // remove the str that causes over length
+                                // console.log(topWord)
+                                finalWrite = topWord;
+                                // console.log(finalWrite);
+                                finalWriteSecond = final[classesDone].substring(final[classesDone].indexOf(topWord) + topWord.length)
+                                // console.log("SDJFLKSjdflkasjlkfjaslkfjsalkfjsalkfjlsadkdjflsadjfsaddfkjsaldkfjasdlk;\n")
+                                // console.log(finalClassesDone.indexOf(topWord));
+                                // console.log(finalClassesDone)
+                                // console.log(topWord)
+                                // = final[classesDone].substring(final[classesDone].indexOf(topWord)+1,final[classesDone].length)
+                                break;
+                            }
+                        }
+                        y += productSansFont.heightAtSize(20);
+                    }
+                } else {
+                    finalWrite = final[classesDone];
+                }
+                firstPage.drawText(finalWrite, {
+                    x: ((169.92 - productSansFont.widthOfTextAtSize(finalWrite, 20)) / 2) + x, //x & y measured in points; divide point value by 72 to get inches.
                     y: y,
                     size: 20,
                     font: productSansFont
                 })
+
+                if (productSansFont.widthOfTextAtSize(final[classesDone], 20) > 171.36) {//need second line writer
+                    firstPage.drawText(finalWriteSecond, {
+                        x: ((169.92 - productSansFont.widthOfTextAtSize(finalWriteSecond, 20)) / 2) + x, //x & y measured in points; divide point value by 72 to get inches.
+                        y: y - (productSansFont.heightAtSize(20) + 5),
+                        size: 20,
+                        font: productSansFont
+                    })
+                    y -= productSansFont.heightAtSize(20);
+                }
                 if (classesDone === 0) {
                     y -= 386
                 }
@@ -257,13 +374,71 @@ app.post('/', function (request, response) {
                 final[i] = classes[w1[i]]
                 console.log(i)
             }
+            finalWrite = "";
+            finalWriteSecond = "";
             for (classesDone = 0; classesDone < 3; classesDone++) {
-                firstPage.drawText(final[classesDone], {
-                    x: ((169.92 - productSansFont.widthOfTextAtSize(final[classesDone], 20)) / 2) + x, //x & y measured in points; divide point value by 72 to get inches.
+                 //ALPHA EXP: Replace words w/ symbols 
+                 if (final[classesDone].indexOf("and") != -1) {
+                    final[classesDone] = final[classesDone].replace("and", "&")
+                }
+
+                // ALPHA EXP: Auto wrapping & double lengthing
+
+                if (productSansFont.widthOfTextAtSize(final[classesDone], 20) > 171.36) { // too long
+                    if (final[classesDone].indexOf(' ') != -1) { // Has space (2 words)
+                        var splitString = final[classesDone].split(' ');
+                        y += productSansFont.heightAtSize(20);
+                        finalWrite = splitString[0];
+                        finalWriteSecond = splitString[1]; // doesnt workl if there are multiple " "
+
+                    } else if (final[classesDone].indexOf(':') != -1) {
+                        var splitString = final[classesDone].split(' ');
+                        y += productSansFont.heightAtSize(20);
+                        finalWrite = splitString[0];
+                        finalWriteSecond = splitString[1]; // doesnt work if there are multiple :
+                    } else { // One word
+                        var hypWord = h.hyphenate(final[classesDone]);
+                        var topWord = "";
+                        var finalClassesDone = final[classesDone];
+                        // console.log(finalClassesDone)
+                        console.log(finalWriteSecond)
+                        for (var i = 0; i < hypWord.length; i++) {
+                            topWord += hypWord[i];
+                            if (productSansFont.widthOfTextAtSize(topWord, 20) > 171.36) {
+                                topWord = topWord.substring(0, topWord.indexOf(hypWord[i])); // remove the str that causes over length
+                                // console.log(topWord)
+                                finalWrite = topWord;
+                                // console.log(finalWrite);
+                                finalWriteSecond = final[classesDone].substring(final[classesDone].indexOf(topWord) + topWord.length)
+                                // console.log("SDJFLKSjdflkasjlkfjaslkfjsalkfjsalkfjlsadkdjflsadjfsaddfkjsaldkfjasdlk;\n")
+                                // console.log(finalClassesDone.indexOf(topWord));
+                                // console.log(finalClassesDone)
+                                // console.log(topWord)
+                                // = final[classesDone].substring(final[classesDone].indexOf(topWord)+1,final[classesDone].length)
+                                break;
+                            }
+                        }
+                        y += productSansFont.heightAtSize(20);
+                    }
+                } else {
+                    finalWrite = final[classesDone];
+                }
+                firstPage.drawText(finalWrite, {
+                    x: ((169.92 - productSansFont.widthOfTextAtSize(finalWrite, 20)) / 2) + x, //x & y measured in points; divide point value by 72 to get inches.
                     y: y,
                     size: 20,
                     font: productSansFont
                 })
+
+                if (productSansFont.widthOfTextAtSize(final[classesDone], 20) > 171.36) {//need second line writer
+                    firstPage.drawText(finalWriteSecond, {
+                        x: ((169.92 - productSansFont.widthOfTextAtSize(finalWriteSecond, 20)) / 2) + x, //x & y measured in points; divide point value by 72 to get inches.
+                        y: y - (productSansFont.heightAtSize(20) + 5),
+                        size: 20,
+                        font: productSansFont
+                    })
+                    y -= productSansFont.heightAtSize(20);
+                }
                 if (classesDone === 0) {
                     y -= 315
                 }
@@ -286,13 +461,71 @@ app.post('/', function (request, response) {
                 console.log(i)
             }
             console.log(final)
+            finalWrite = "";
+            finalWriteSecond = "";
             for (classesDone = 0; classesDone < 7; classesDone++) {
-                firstPage.drawText(final[classesDone], {
-                    x: ((169.92 - productSansFont.widthOfTextAtSize(final[classesDone], 20)) / 2) + x, //x & y measured in points; divide point value by 72 to get inches.
+                 //ALPHA EXP: Replace words w/ symbols 
+                 if (final[classesDone].indexOf("and") != -1) {
+                    final[classesDone] = final[classesDone].replace("and", "&")
+                }
+
+                // ALPHA EXP: Auto wrapping & double lengthing
+
+                if (productSansFont.widthOfTextAtSize(final[classesDone], 20) > 171.36) { // too long
+                    if (final[classesDone].indexOf(' ') != -1) { // Has space (2 words)
+                        var splitString = final[classesDone].split(' ');
+                        y += productSansFont.heightAtSize(20);
+                        finalWrite = splitString[0];
+                        finalWriteSecond = splitString[1]; // doesnt workl if there are multiple " "
+
+                    } else if (final[classesDone].indexOf(':') != -1) {
+                        var splitString = final[classesDone].split(' ');
+                        y += productSansFont.heightAtSize(20);
+                        finalWrite = splitString[0];
+                        finalWriteSecond = splitString[1]; // doesnt work if there are multiple :
+                    } else { // One word
+                        var hypWord = h.hyphenate(final[classesDone]);
+                        var topWord = "";
+                        var finalClassesDone = final[classesDone];
+                        // console.log(finalClassesDone)
+                        console.log(finalWriteSecond)
+                        for (var i = 0; i < hypWord.length; i++) {
+                            topWord += hypWord[i];
+                            if (productSansFont.widthOfTextAtSize(topWord, 20) > 171.36) {
+                                topWord = topWord.substring(0, topWord.indexOf(hypWord[i])); // remove the str that causes over length
+                                // console.log(topWord)
+                                finalWrite = topWord;
+                                // console.log(finalWrite);
+                                finalWriteSecond = final[classesDone].substring(final[classesDone].indexOf(topWord) + topWord.length)
+                                // console.log("SDJFLKSjdflkasjlkfjaslkfjsalkfjsalkfjlsadkdjflsadjfsaddfkjsaldkfjasdlk;\n")
+                                // console.log(finalClassesDone.indexOf(topWord));
+                                // console.log(finalClassesDone)
+                                // console.log(topWord)
+                                // = final[classesDone].substring(final[classesDone].indexOf(topWord)+1,final[classesDone].length)
+                                break;
+                            }
+                        }
+                        y += productSansFont.heightAtSize(20);
+                    }
+                } else {
+                    finalWrite = final[classesDone];
+                }
+                firstPage.drawText(finalWrite, {
+                    x: ((169.92 - productSansFont.widthOfTextAtSize(finalWrite, 20)) / 2) + x, //x & y measured in points; divide point value by 72 to get inches.
                     y: y,
                     size: 20,
                     font: productSansFont
                 })
+
+                if (productSansFont.widthOfTextAtSize(final[classesDone], 20) > 171.36) {//need second line writer
+                    firstPage.drawText(finalWriteSecond, {
+                        x: ((169.92 - productSansFont.widthOfTextAtSize(finalWriteSecond, 20)) / 2) + x, //x & y measured in points; divide point value by 72 to get inches.
+                        y: y - (productSansFont.heightAtSize(20) + 5),
+                        size: 20,
+                        font: productSansFont
+                    })
+                    y -= productSansFont.heightAtSize(20);
+                }
                 if (classesDone === 1) {
                     y -= 250
 
@@ -313,13 +546,71 @@ app.post('/', function (request, response) {
             console.log(final)
             x += 230;
             y = 1230;
+            finalWrite = "";
+            finalWriteSecond = "";
             for (classesDone = 0; classesDone < 7; classesDone++) {
-                firstPage.drawText(final[classesDone], {
-                    x: ((169.92 - productSansFont.widthOfTextAtSize(final[classesDone], 20)) / 2) + x, //x & y measured in points; divide point value by 72 to get inches.
+                 //ALPHA EXP: Replace words w/ symbols 
+                 if (final[classesDone].indexOf("and") != -1) {
+                    final[classesDone] = final[classesDone].replace("and", "&")
+                }
+
+                // ALPHA EXP: Auto wrapping & double lengthing
+
+                if (productSansFont.widthOfTextAtSize(final[classesDone], 20) > 171.36) { // too long
+                    if (final[classesDone].indexOf(' ') != -1) { // Has space (2 words)
+                        var splitString = final[classesDone].split(' ');
+                        y += productSansFont.heightAtSize(20);
+                        finalWrite = splitString[0];
+                        finalWriteSecond = splitString[1]; // doesnt workl if there are multiple " "
+
+                    } else if (final[classesDone].indexOf(':') != -1) {
+                        var splitString = final[classesDone].split(' ');
+                        y += productSansFont.heightAtSize(20);
+                        finalWrite = splitString[0];
+                        finalWriteSecond = splitString[1]; // doesnt work if there are multiple :
+                    } else { // One word
+                        var hypWord = h.hyphenate(final[classesDone]);
+                        var topWord = "";
+                        var finalClassesDone = final[classesDone];
+                        // console.log(finalClassesDone)
+                        console.log(finalWriteSecond)
+                        for (var i = 0; i < hypWord.length; i++) {
+                            topWord += hypWord[i];
+                            if (productSansFont.widthOfTextAtSize(topWord, 20) > 171.36) {
+                                topWord = topWord.substring(0, topWord.indexOf(hypWord[i])); // remove the str that causes over length
+                                // console.log(topWord)
+                                finalWrite = topWord;
+                                // console.log(finalWrite);
+                                finalWriteSecond = final[classesDone].substring(final[classesDone].indexOf(topWord) + topWord.length)
+                                // console.log("SDJFLKSjdflkasjlkfjaslkfjsalkfjsalkfjlsadkdjflsadjfsaddfkjsaldkfjasdlk;\n")
+                                // console.log(finalClassesDone.indexOf(topWord));
+                                // console.log(finalClassesDone)
+                                // console.log(topWord)
+                                // = final[classesDone].substring(final[classesDone].indexOf(topWord)+1,final[classesDone].length)
+                                break;
+                            }
+                        }
+                        y += productSansFont.heightAtSize(20);
+                    }
+                } else {
+                    finalWrite = final[classesDone];
+                }
+                firstPage.drawText(finalWrite, {
+                    x: ((169.92 - productSansFont.widthOfTextAtSize(finalWrite, 20)) / 2) + x, //x & y measured in points; divide point value by 72 to get inches.
                     y: y,
                     size: 20,
                     font: productSansFont
                 })
+
+                if (productSansFont.widthOfTextAtSize(final[classesDone], 20) > 171.36) {//need second line writer
+                    firstPage.drawText(finalWriteSecond, {
+                        x: ((169.92 - productSansFont.widthOfTextAtSize(finalWriteSecond, 20)) / 2) + x, //x & y measured in points; divide point value by 72 to get inches.
+                        y: y - (productSansFont.heightAtSize(20) + 5),
+                        size: 20,
+                        font: productSansFont
+                    })
+                    y -= productSansFont.heightAtSize(20);
+                }
                 if (classesDone === 1) {
                     y -= 250
                 }
@@ -341,13 +632,71 @@ app.post('/', function (request, response) {
                 final[i] = classes[t2[i]]
             }
             console.log(final)
+            finalWrite = "";
+            finalWriteSecond = "";
             for (classesDone = 0; classesDone < 3; classesDone++) {
-                firstPage.drawText(final[classesDone], {
-                    x: ((171.36 - productSansFont.widthOfTextAtSize(final[classesDone], 20)) / 2) + x, //x & y measured in points; divide point value by 72 to get inches.
+                 //ALPHA EXP: Replace words w/ symbols 
+                 if (final[classesDone].indexOf("and") != -1) {
+                    final[classesDone] = final[classesDone].replace("and", "&")
+                }
+
+                // ALPHA EXP: Auto wrapping & double lengthing
+
+                if (productSansFont.widthOfTextAtSize(final[classesDone], 20) > 171.36) { // too long
+                    if (final[classesDone].indexOf(' ') != -1) { // Has space (2 words)
+                        var splitString = final[classesDone].split(' ');
+                        y += productSansFont.heightAtSize(20);
+                        finalWrite = splitString[0];
+                        finalWriteSecond = splitString[1]; // doesnt workl if there are multiple " "
+
+                    } else if (final[classesDone].indexOf(':') != -1) {
+                        var splitString = final[classesDone].split(' ');
+                        y += productSansFont.heightAtSize(20);
+                        finalWrite = splitString[0];
+                        finalWriteSecond = splitString[1]; // doesnt work if there are multiple :
+                    } else { // One word
+                        var hypWord = h.hyphenate(final[classesDone]);
+                        var topWord = "";
+                        var finalClassesDone = final[classesDone];
+                        // console.log(finalClassesDone)
+                        console.log(finalWriteSecond)
+                        for (var i = 0; i < hypWord.length; i++) {
+                            topWord += hypWord[i];
+                            if (productSansFont.widthOfTextAtSize(topWord, 20) > 171.36) {
+                                topWord = topWord.substring(0, topWord.indexOf(hypWord[i])); // remove the str that causes over length
+                                // console.log(topWord)
+                                finalWrite = topWord;
+                                // console.log(finalWrite);
+                                finalWriteSecond = final[classesDone].substring(final[classesDone].indexOf(topWord) + topWord.length)
+                                // console.log("SDJFLKSjdflkasjlkfjaslkfjsalkfjsalkfjlsadkdjflsadjfsaddfkjsaldkfjasdlk;\n")
+                                // console.log(finalClassesDone.indexOf(topWord));
+                                // console.log(finalClassesDone)
+                                // console.log(topWord)
+                                // = final[classesDone].substring(final[classesDone].indexOf(topWord)+1,final[classesDone].length)
+                                break;
+                            }
+                        }
+                        y += productSansFont.heightAtSize(20);
+                    }
+                } else {
+                    finalWrite = final[classesDone];
+                }
+                firstPage.drawText(finalWrite, {
+                    x: ((169.92 - productSansFont.widthOfTextAtSize(finalWrite, 20)) / 2) + x, //x & y measured in points; divide point value by 72 to get inches.
                     y: y,
                     size: 20,
                     font: productSansFont
                 })
+
+                if (productSansFont.widthOfTextAtSize(final[classesDone], 20) > 171.36) {//need second line writer
+                    firstPage.drawText(finalWriteSecond, {
+                        x: ((169.92 - productSansFont.widthOfTextAtSize(finalWriteSecond, 20)) / 2) + x, //x & y measured in points; divide point value by 72 to get inches.
+                        y: y - (productSansFont.heightAtSize(20) + 5),
+                        size: 20,
+                        font: productSansFont
+                    })
+                    y -= productSansFont.heightAtSize(20);
+                }
                 if (classesDone === 0) {
                     y -= 386
                 }
@@ -370,13 +719,71 @@ app.post('/', function (request, response) {
                 console.log(i)
             }
             console.log(final)
+            finalWrite = "";
+            finalWriteSecond = "";
             for (classesDone = 0; classesDone < 4; classesDone++) {
-                firstPage.drawText(final[classesDone], {
-                    x: ((171.36 - productSansFont.widthOfTextAtSize(final[classesDone], 20)) / 2) + x, //x & y measured in points; divide point value by 72 to get inches.
+                 //ALPHA EXP: Replace words w/ symbols 
+                 if (final[classesDone].indexOf("and") != -1) {
+                    final[classesDone] = final[classesDone].replace("and", "&")
+                }
+
+                // ALPHA EXP: Auto wrapping & double lengthing
+
+                if (productSansFont.widthOfTextAtSize(final[classesDone], 20) > 171.36) { // too long
+                    if (final[classesDone].indexOf(' ') != -1) { // Has space (2 words)
+                        var splitString = final[classesDone].split(' ');
+                        y += productSansFont.heightAtSize(20);
+                        finalWrite = splitString[0];
+                        finalWriteSecond = splitString[1]; // doesnt workl if there are multiple " "
+
+                    } else if (final[classesDone].indexOf(':') != -1) {
+                        var splitString = final[classesDone].split(' ');
+                        y += productSansFont.heightAtSize(20);
+                        finalWrite = splitString[0];
+                        finalWriteSecond = splitString[1]; // doesnt work if there are multiple :
+                    } else { // One word
+                        var hypWord = h.hyphenate(final[classesDone]);
+                        var topWord = "";
+                        var finalClassesDone = final[classesDone];
+                        // console.log(finalClassesDone)
+                        console.log(finalWriteSecond)
+                        for (var i = 0; i < hypWord.length; i++) {
+                            topWord += hypWord[i];
+                            if (productSansFont.widthOfTextAtSize(topWord, 20) > 171.36) {
+                                topWord = topWord.substring(0, topWord.indexOf(hypWord[i])); // remove the str that causes over length
+                                // console.log(topWord)
+                                finalWrite = topWord;
+                                // console.log(finalWrite);
+                                finalWriteSecond = final[classesDone].substring(final[classesDone].indexOf(topWord) + topWord.length)
+                                // console.log("SDJFLKSjdflkasjlkfjaslkfjsalkfjsalkfjlsadkdjflsadjfsaddfkjsaldkfjasdlk;\n")
+                                // console.log(finalClassesDone.indexOf(topWord));
+                                // console.log(finalClassesDone)
+                                // console.log(topWord)
+                                // = final[classesDone].substring(final[classesDone].indexOf(topWord)+1,final[classesDone].length)
+                                break;
+                            }
+                        }
+                        y += productSansFont.heightAtSize(20);
+                    }
+                } else {
+                    finalWrite = final[classesDone];
+                }
+                firstPage.drawText(finalWrite, {
+                    x: ((169.92 - productSansFont.widthOfTextAtSize(finalWrite, 20)) / 2) + x, //x & y measured in points; divide point value by 72 to get inches.
                     y: y,
                     size: 20,
                     font: productSansFont
                 })
+
+                if (productSansFont.widthOfTextAtSize(final[classesDone], 20) > 171.36) {//need second line writer
+                    firstPage.drawText(finalWriteSecond, {
+                        x: ((169.92 - productSansFont.widthOfTextAtSize(finalWriteSecond, 20)) / 2) + x, //x & y measured in points; divide point value by 72 to get inches.
+                        y: y - (productSansFont.heightAtSize(20) + 5),
+                        size: 20,
+                        font: productSansFont
+                    })
+                    y -= productSansFont.heightAtSize(20);
+                }
                 if (classesDone === 0) {
                     y -= 386
                 }
@@ -398,13 +805,71 @@ app.post('/', function (request, response) {
                 final[i] = classes[r2[i]]
             }
             console.log(final)
+            finalWrite = "";
+            finalWriteSecond = "";
             for (classesDone = 0; classesDone < 4; classesDone++) {
-                firstPage.drawText(final[classesDone], {
-                    x: ((171.36 - productSansFont.widthOfTextAtSize(final[classesDone], 20)) / 2) + x, //x & y measured in points; divide point value by 72 to get inches.
+                 //ALPHA EXP: Replace words w/ symbols 
+                 if (final[classesDone].indexOf("and") != -1) {
+                    final[classesDone] = final[classesDone].replace("and", "&")
+                }
+
+                // ALPHA EXP: Auto wrapping & double lengthing
+
+                if (productSansFont.widthOfTextAtSize(final[classesDone], 20) > 171.36) { // too long
+                    if (final[classesDone].indexOf(' ') != -1) { // Has space (2 words)
+                        var splitString = final[classesDone].split(' ');
+                        y += productSansFont.heightAtSize(20);
+                        finalWrite = splitString[0];
+                        finalWriteSecond = splitString[1]; // doesnt workl if there are multiple " "
+
+                    } else if (final[classesDone].indexOf(':') != -1) {
+                        var splitString = final[classesDone].split(' ');
+                        y += productSansFont.heightAtSize(20);
+                        finalWrite = splitString[0];
+                        finalWriteSecond = splitString[1]; // doesnt work if there are multiple :
+                    } else { // One word
+                        var hypWord = h.hyphenate(final[classesDone]);
+                        var topWord = "";
+                        var finalClassesDone = final[classesDone];
+                        // console.log(finalClassesDone)
+                        console.log(finalWriteSecond)
+                        for (var i = 0; i < hypWord.length; i++) {
+                            topWord += hypWord[i];
+                            if (productSansFont.widthOfTextAtSize(topWord, 20) > 171.36) {
+                                topWord = topWord.substring(0, topWord.indexOf(hypWord[i])); // remove the str that causes over length
+                                // console.log(topWord)
+                                finalWrite = topWord;
+                                // console.log(finalWrite);
+                                finalWriteSecond = final[classesDone].substring(final[classesDone].indexOf(topWord) + topWord.length)
+                                // console.log("SDJFLKSjdflkasjlkfjaslkfjsalkfjsalkfjlsadkdjflsadjfsaddfkjsaldkfjasdlk;\n")
+                                // console.log(finalClassesDone.indexOf(topWord));
+                                // console.log(finalClassesDone)
+                                // console.log(topWord)
+                                // = final[classesDone].substring(final[classesDone].indexOf(topWord)+1,final[classesDone].length)
+                                break;
+                            }
+                        }
+                        y += productSansFont.heightAtSize(20);
+                    }
+                } else {
+                    finalWrite = final[classesDone];
+                }
+                firstPage.drawText(finalWrite, {
+                    x: ((169.92 - productSansFont.widthOfTextAtSize(finalWrite, 20)) / 2) + x, //x & y measured in points; divide point value by 72 to get inches.
                     y: y,
                     size: 20,
                     font: productSansFont
                 })
+
+                if (productSansFont.widthOfTextAtSize(final[classesDone], 20) > 171.36) {//need second line writer
+                    firstPage.drawText(finalWriteSecond, {
+                        x: ((169.92 - productSansFont.widthOfTextAtSize(finalWriteSecond, 20)) / 2) + x, //x & y measured in points; divide point value by 72 to get inches.
+                        y: y - (productSansFont.heightAtSize(20) + 5),
+                        size: 20,
+                        font: productSansFont
+                    })
+                    y -= productSansFont.heightAtSize(20);
+                }
                 if (classesDone === 0) {
                     y -= 386
                 }
@@ -426,13 +891,71 @@ app.post('/', function (request, response) {
                 final[i] = classes[r2[i]]
             }
             console.log(final)
+            finalWrite = "";
+            finalWriteSecond = "";
             for (classesDone = 0; classesDone < 3; classesDone++) {
-                firstPage.drawText(final[classesDone], {
-                    x: ((171.36 - productSansFont.widthOfTextAtSize(final[classesDone], 20)) / 2) + x, //x & y measured in points; divide point value by 72 to get inches.
+                 //ALPHA EXP: Replace words w/ symbols 
+                 if (final[classesDone].indexOf("and") != -1) {
+                    final[classesDone] = final[classesDone].replace("and", "&")
+                }
+
+                // ALPHA EXP: Auto wrapping & double lengthing
+
+                if (productSansFont.widthOfTextAtSize(final[classesDone], 20) > 171.36) { // too long
+                    if (final[classesDone].indexOf(' ') != -1) { // Has space (2 words)
+                        var splitString = final[classesDone].split(' ');
+                        y += productSansFont.heightAtSize(20);
+                        finalWrite = splitString[0];
+                        finalWriteSecond = splitString[1]; // doesnt workl if there are multiple " "
+
+                    } else if (final[classesDone].indexOf(':') != -1) {
+                        var splitString = final[classesDone].split(' ');
+                        y += productSansFont.heightAtSize(20);
+                        finalWrite = splitString[0];
+                        finalWriteSecond = splitString[1]; // doesnt work if there are multiple :
+                    } else { // One word
+                        var hypWord = h.hyphenate(final[classesDone]);
+                        var topWord = "";
+                        var finalClassesDone = final[classesDone];
+                        // console.log(finalClassesDone)
+                        console.log(finalWriteSecond)
+                        for (var i = 0; i < hypWord.length; i++) {
+                            topWord += hypWord[i];
+                            if (productSansFont.widthOfTextAtSize(topWord, 20) > 171.36) {
+                                topWord = topWord.substring(0, topWord.indexOf(hypWord[i])); // remove the str that causes over length
+                                // console.log(topWord)
+                                finalWrite = topWord;
+                                // console.log(finalWrite);
+                                finalWriteSecond = final[classesDone].substring(final[classesDone].indexOf(topWord) + topWord.length)
+                                // console.log("SDJFLKSjdflkasjlkfjaslkfjsalkfjsalkfjlsadkdjflsadjfsaddfkjsaldkfjasdlk;\n")
+                                // console.log(finalClassesDone.indexOf(topWord));
+                                // console.log(finalClassesDone)
+                                // console.log(topWord)
+                                // = final[classesDone].substring(final[classesDone].indexOf(topWord)+1,final[classesDone].length)
+                                break;
+                            }
+                        }
+                        y += productSansFont.heightAtSize(20);
+                    }
+                } else {
+                    finalWrite = final[classesDone];
+                }
+                firstPage.drawText(finalWrite, {
+                    x: ((169.92 - productSansFont.widthOfTextAtSize(finalWrite, 20)) / 2) + x, //x & y measured in points; divide point value by 72 to get inches.
                     y: y,
                     size: 20,
                     font: productSansFont
                 })
+
+                if (productSansFont.widthOfTextAtSize(final[classesDone], 20) > 171.36) {//need second line writer
+                    firstPage.drawText(finalWriteSecond, {
+                        x: ((169.92 - productSansFont.widthOfTextAtSize(finalWriteSecond, 20)) / 2) + x, //x & y measured in points; divide point value by 72 to get inches.
+                        y: y - (productSansFont.heightAtSize(20) + 5),
+                        size: 20,
+                        font: productSansFont
+                    })
+                    y -= productSansFont.heightAtSize(20);
+                }
                 if (classesDone === 0) {
                     y -= 445
                 }
@@ -456,12 +979,76 @@ app.post('/', function (request, response) {
             x = 38.16;
             y = 686;
             for (classesDone = 0; classesDone < 7; classesDone++) {
-                firstPage.drawText(final[classesDone], { //54.72
-                    x: ((54.72 - productSansFont.widthOfTextAtSize(final[classesDone], 7)) / 2) + x, //x & y measured in points; divide point value by 72 to get inches.
+                //ALPHA EXP: Replace words w/ symbols 
+                if (final[classesDone].indexOf("and") != -1) {
+                    final[classesDone] = final[classesDone].replace("and", "&")
+                }
+
+                // ALPHA EXP: Auto wrapping & double lengthing
+
+                if (productSansFont.widthOfTextAtSize(final[classesDone], 20) > 171.36) { // too long
+                    if (final[classesDone].indexOf(' ') != -1) { // Has space (2 words)
+                        var splitString = final[classesDone].split(' ');
+                        y += productSansFont.heightAtSize(20);
+                        finalWrite = splitString[0];
+                        finalWriteSecond = splitString[1]; // doesnt workl if there are multiple " "
+
+                    } else if (final[classesDone].indexOf(':') != -1) {
+                        var splitString = final[classesDone].split(' ');
+                        y += productSansFont.heightAtSize(20);
+                        finalWrite = splitString[0];
+                        finalWriteSecond = splitString[1]; // doesnt work if there are multiple :
+                    } else { // One word
+                        var hypWord = h.hyphenate(final[classesDone]);
+                        var topWord = "";
+                        var finalClassesDone = final[classesDone];
+                        // console.log(finalClassesDone)
+                        console.log(finalWriteSecond)
+                        for (var i = 0; i < hypWord.length; i++) {
+                            topWord += hypWord[i];
+                            if (productSansFont.widthOfTextAtSize(topWord, 20) > 171.36) {
+                                topWord = topWord.substring(0, topWord.indexOf(hypWord[i])); // remove the str that causes over length
+                                // console.log(topWord)
+                                finalWrite = topWord;
+                                // console.log(finalWrite);
+                                finalWriteSecond = final[classesDone].substring(final[classesDone].indexOf(topWord) + topWord.length)
+                                // console.log("SDJFLKSjdflkasjlkfjaslkfjsalkfjsalkfjlsadkdjflsadjfsaddfkjsaldkfjasdlk;\n")
+                                // console.log(finalClassesDone.indexOf(topWord));
+                                // console.log(finalClassesDone)
+                                // console.log(topWord)
+                                // = final[classesDone].substring(final[classesDone].indexOf(topWord)+1,final[classesDone].length)
+                                break;
+                            }
+                        }
+                        y += productSansFont.heightAtSize(20);
+                    }
+                } else {
+                    finalWrite = final[classesDone];
+                }
+                firstPage.drawText(finalWrite, {
+                    x: ((54.72 - productSansFont.widthOfTextAtSize(finalWrite, 7)) / 2) + x, //x & y measured in points; divide point value by 72 to get inches.
                     y: y,
                     size: 7,
                     font: productSansFont
                 })
+
+                if (productSansFont.widthOfTextAtSize(final[classesDone], 7) > 171.36) {//need second line writer
+                    firstPage.drawText(finalWriteSecond, {
+                        x: ((54.72 - productSansFont.widthOfTextAtSize(finalWriteSecond, 7)) / 2) + x, //x & y measured in points; divide point value by 72 to get inches.
+                        y: y - (productSansFont.heightAtSize(7) + 1),
+                        size: 7,
+                        font: productSansFont
+                    })
+                    y -= productSansFont.heightAtSize(7);
+                }
+
+                // firstPage.drawText(final[classesDone], { //54.72
+                //     x: ((54.72 - productSansFont.widthOfTextAtSize(final[classesDone], 7)) / 2) + x, //x & y measured in points; divide point value by 72 to get inches.
+                //     y: y,
+                //     size: 7,
+                //     font: productSansFont
+                // })
+                
                 if (classesDone === 1) {
                     y -= 78
 
