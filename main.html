@@ -4,7 +4,7 @@
  *  Server sided hosted on Heroku. Website hosted on Infinity Free.
  *  WEBSITE WITH IMPLIMENTATION: http://generator.rocketscience.monster/
  *--------------------------------------------------------------------------------------------*/ -->
- 
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,11 +14,24 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>CPS Schedule Generator</title>
     <script src="main.js"></script>
+    <!-- jQuery -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <link rel="stylesheet" type="text/css" href="main.css">
+
+    <!-- Favicon -->
+    <link rel="icon" href="./favicon.png">
+
+    <script>
+        $(document).ready(function () {
+            $('select').formSelect();
+        });
+
+    </script>
 </head>
 
 <body>
@@ -38,6 +51,9 @@
     <div id="coreFunc" class="row">
         <script src="main.js"></script>
         <form id="classForm" method="POST" action="https://blooming-tor-45007.herokuapp.com/" class="col">
+            <!-- https://blooming-tor-45007.herokuapp.com/ -->
+            <!-- https://cpsschgendev.herokuapp.com/ -->
+            <!-- http://localhost:8000/ -->
             <div class="row">
                 <div class="input-field col s12">
                     <input type="text" id="a" name="first" placeholder="English I" class="validate">
@@ -78,6 +94,16 @@
                 <div class="input-field col s12">
                     <input type="text" id="g" name="seventh" placeholder="Math 2" class="validate">
                     <label for="g">Seventh Class (Block G)</label>
+                </div>
+            <!-- </div> -->
+            <!-- <div class="row"> -->
+             <!--Combine divs to stop a gap  -->
+                <div class="input-field col s12">
+                    <select name="vertical">
+                        <option value="" disabled selected>Choose style</option>
+                        <option value="vertical">Vertical</option>
+                        <option value="horizontal">Horizontal</option>
+                    </select>
                 </div>
             </div>
             <a class="waves-effect waves-light btn" type="submit" id="coreFuncSubmit"

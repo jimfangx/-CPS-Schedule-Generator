@@ -1,15 +1,25 @@
 .centered {
     text-align: center;
 }
+
 #demo {
     height: 680px;
     width: 100%;
 }
+
+@media only screen and (max-width: 1000px) {
+    #demo {
+        height: 300px;
+        width: 100%;
+    }
+}
+
 #classForm {
     width: 100%;
     margin-left: 25%;
     width: 50%;
 }
+
 #coreFuncSubmit {
     margin-left: 45%;
 }
