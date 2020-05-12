@@ -2017,6 +2017,7 @@ if (port == null || port == "") {
     port = 8000;
 }
 app.listen(port)
-console.log(`Listening at localhost:8000`)
+console.log(`Listening at https://blooming-tor-45007.herokuapp.com:${port}`)
 //https://cpsschgendev.herokuapp.com:${port}
 //https://blooming-tor-45007.herokuapp.com
+//localhost:8000
