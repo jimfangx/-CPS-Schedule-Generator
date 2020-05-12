@@ -1045,7 +1045,12 @@ app.post('/', function (request, response) {
                 else {
                     y -= 265
                 }
-
+                firstPage.drawText(`Custom Schedule Generated on https://generator.rocketscience.monster`, {
+                    x: 22.32,
+                    y: 11,
+                    size: 20,
+                    font: productSansFont
+                })
             }
         } else if (vertical === 'vertical') {
             console.log("I AM IN VERTICAL")
@@ -1988,7 +1993,12 @@ app.post('/', function (request, response) {
                     y -= 265
                 }
             }
-
+            firstPage.drawText(`Custom Schedule Generated on https://generator.rocketscience.monster`, {
+                x: 10.8,
+                y: 18.72,
+                size: 7,
+                font: productSansFont
+            })
         }
 
         const pdfBytes = await pdfDoc.save()
