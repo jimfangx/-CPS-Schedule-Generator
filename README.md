@@ -23,7 +23,7 @@ Instructions on how to build CPS Schedule Generator from the source code.
     * A fully functioning website to host the frontend & basic knowledge with web hosting (cPanel, etc)
         
 * Instructions:
-    * Fork LTS version of the project using `git clone https://github.com/AirFusion45/-CPS-Schedule-Generator.git`
+    * Clone LTS version of the project using `git clone https://github.com/AirFusion45/-CPS-Schedule-Generator.git`
     * Follow instructions from your hosting service on deploying to their servers. [Here](https://devcenter.heroku.com/articles/preparing-a-codebase-for-heroku-deployment) are Heroku's instructions.
     * Grab your deployed app's URL
     * Go into `sever.js` and replace `https://blooming-tor-45007.herokuapp.com` with your deployed app's URL
@@ -31,7 +31,7 @@ Instructions on how to build CPS Schedule Generator from the source code.
     
 ### Building frontend
 * Instructions:
-    * Presumably you have already forked the project. 
+    * Presumably you have already cloned the project. 
     * Head to your website hosting provider. 
     * Open the file manager in cPanel.
     * Upload the `main.html`, `main.js` and `main.css` files to your website. Make sure the files are uploaded to the folder of your page/subpage. Also make sure that `.htaccess` has been modified to include `main.html`
@@ -50,7 +50,7 @@ This projecet is licensed under MIT License - See the LICENSE.md file for more d
 * AirFusion45 - Owner
 
 # Contributions
-* R Malik - Creator of the implemented website's favicon. See his creation [here](https://raw.githubusercontent.com/AirFusion45/-CPS-Schedule-Generator/v1.0B/favicon.png)
+* R Malik - Creator of the implemented website's favicon. See his creation [here](https://raw.githubusercontent.com/AirFusion45/-CPS-Schedule-Generator/master/favicon.png)
 
 # Credits
 * PDF modification library from Hopding's pdf-lib [here](https://github.com/Hopding/pdf-lib).
@@ -64,4 +64,4 @@ If you find any bugs, license issues, missing credits, etc. Feel free to contact
     * Discord: AirFusion#1706
 
 # Note/Notes
-* The latest stable version is the master branch
+* The latest stable version is the latest release in releases

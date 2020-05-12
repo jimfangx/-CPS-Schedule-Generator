@@ -1,6 +1,6 @@
 {
   "name": "-cps-schedule-generator",
-  "version": "1.0.0-alpha1",
+  "version": "2.0.0",
   "description": "Full stack web app to allow CPS students to generate their own customized schedules.",
   "main": "server.js",
   "scripts": {
