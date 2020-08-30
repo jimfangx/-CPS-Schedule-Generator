@@ -1,7 +1,7 @@
 # -CPS-Schedule-Generator
 CPS Schedule Generator is a full stack web application that allows [CPS](https://www.college-prep.org/) students to generate a customized version of their daily schedule within a few minutes. Users would input their classes in order (Block A, B, C, D, E, F, G) then hit "Submit". The program will return a printable PDF with the user's classes mapped to each block on the schedule. 
 
-The implemented version of this program can be found [here](http://generator.rocketscience.monster).
+The implemented version of this program can be found [here](https://generator.rocketscience.monster).
 
 # Implementation Technologies Breakdown
 
