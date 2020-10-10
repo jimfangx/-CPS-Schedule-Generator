@@ -23,6 +23,6 @@
     "hyphenation.en-us": "^0.2.1",
     "hypher": "^0.2.5",
     "node-fetch": "^2.6.1",
-    "pdf-lib": "^1.11.1"
+    "pdf-lib": "^1.11.2"
   }
 }
